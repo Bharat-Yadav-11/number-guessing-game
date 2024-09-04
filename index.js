@@ -11,7 +11,7 @@ function display() {
 }
 
 function easy() {
-    const msg = "Great! You have selected the Easy difficulty level. \n Let's start the game";
+    const msg = "Great! You have selected the Easy difficulty level. \nLet's start the game";
     console.log(msg);
     let randNum = Math.floor(Math.random() * 100) + 1;
     let attempts = 0;
@@ -49,7 +49,7 @@ function easy() {
 }
 
 function medium() {
-    const msg = "Great! You have selected the Medium difficulty level. \n Let's start the game";
+    const msg = "Great! You have selected the Medium difficulty level. \nLet's start the game";
     console.log(msg);
     let randNum = Math.floor(Math.random() * 100) + 1;
     let attempts = 0;
@@ -66,7 +66,7 @@ function medium() {
                     askQuestion();
                 } else {
                     console.log(`Sorry! You've used all ${maxAttempts} attempts. The correct number was ${randNum}.`);
-                    r1.close;
+                    r1.close();
                 }
             } else if (guess > randNum) {
                 console.log(`Incorrect! The number is less than ${guess}`);
@@ -77,7 +77,7 @@ function medium() {
                     r1.close();
                 }
             } else {
-                console.log(`Sorry! You've used all ${maxAttempts} attempts. The correct number was ${randNum}.`);
+                console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
                 r1.close();
             }
         });
@@ -87,7 +87,41 @@ function medium() {
 }
 
 function difficult() {
-    // implement hard difficulty level
+    const msg = "Great! You have selected the Hard difficulty level. \nLet's start the game";
+    console.log(msg);
+    let randNum = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+    let maxAttempts = 3;
+
+    function askQuestion() {
+        r1.question("Enter your guess: ", (guess) => {
+            guess = parseInt(guess);
+            attempts++;
+
+            if (guess < randNum) {
+                console.log(`Incorrect! The number is greater than ${guess}`);
+                if(attempts < maxAttempts) {
+                    askQuestion();
+                } else {
+                    console.log(`Sorry! You've used all ${maxAttempts} attempts. The correct number was ${randNum}.`);
+                    r1.close();
+                }
+            } else if (guess > randNum) {
+                console.log(`Incorrect! The number is less than ${guess}`);
+                if(attempts < maxAttempts) {
+                    askQuestion();
+                } else {
+                    console.log(`Sorry! You've used all ${maxAttempts} attempts. The correct number was ${randNum}.`);
+                    r1.close();
+                }
+            } else {
+                console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
+                r1.close();
+            }
+        });
+
+    }
+    askQuestion();
 }
 
 function difficultyLevel() {
